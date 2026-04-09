@@ -1,0 +1,40 @@
+# Virtual Environments
+venv/
+env/
+.env
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE and Editor Directories
+.cursor/
+.vscode/
+.idea/
+
+# Developer scratch spaces
+scratch/
+
+# Application state, tracking, and logs
+.current_batch
+jobs.txt
+sent_companies.txt
+failed_emails.txt
+company_database.txt
+verified_companies.json
+dedupe_store.json
+applied_companies.json
+applied_jobs.json
+applications.csv
+pending_whatsapp_notifications.json
+
+# Application logs
+logs/
+*.log
+
+# Generated markdown reports
+*_report_*.md
+whatsapp_*.md
+application_emails.md
