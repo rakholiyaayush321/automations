@@ -25,6 +25,7 @@ DAILY_TARGET_MAX = 20
 DAILY_TARGET = DAILY_TARGET_MAX
 FAILED_EMAILS_FILE = PROJECT_DIR / "failed_emails.json"
 PRIORITY_LOG = PROJECT_DIR / "priority_applications.log"
+REAPPLICATION_DAYS = 30  # Allow reapplication to same company after 30 days
 
 # ── Candidate Profile ────────────────────────────────────────────────────────
 CANDIDATE = {
