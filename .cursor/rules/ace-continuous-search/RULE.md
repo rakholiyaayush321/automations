@@ -27,7 +27,7 @@ not simple paths. Always use `ace_list_domains` to discover actual domain names.
 
 ## Example Workflow
 
-1. Start task → `ace_get_playbook()` to retrieve all patterns
+1. Start task → `ace_search("your task description")` to retrieve relevant patterns
 2. 5+ edits later → `ace_search("error handling")` for fresh patterns
 3. Need focused results → `ace_list_domains()` then `ace_search(..., allowed_domains=[...])`
 4. Task complete → `ace_learn(...)` to capture lessons

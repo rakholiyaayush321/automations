@@ -13,7 +13,7 @@ Available ACE commands and MCP tools.
 
 ## MCP Tools (Use These Directly)
 
-- `ace_get_playbook()` - Get all patterns (call BEFORE tasks)
+- `ace_get_playbook()` - Get ALL patterns (only for export/backup, prefer ace_search)
 - `ace_search(query)` - Search for specific patterns
 - `ace_learn(task, trajectory, output, success)` - Capture learning (call AFTER tasks)
 - `ace_bootstrap(mode, thoroughness)` - Initialize playbook
@@ -22,7 +22,7 @@ Available ACE commands and MCP tools.
 ## Automatic Features
 
 The MCP tools are designed for automatic invocation:
-- **ace_get_playbook**: Called automatically before every task
+- **ace_search**: Called automatically before every task (5-10 relevant patterns)
 - **ace_learn**: Called automatically after substantial work
 
 ## UI Commands (Command Palette)

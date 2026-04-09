@@ -189,7 +189,21 @@ def send_email_with_retry(
         }
     
     # Generate email content
-    subject, body = build_email_body(job_title, company_name)
+    # Try dynamic ChatGPT generation first (free proxy)
+    try:
+        from llm_generator import generate_cold_email
+        from config import log
+        llm_subject, llm_body = generate_cold_email(job_title, company_name)
+    except Exception as e:
+        from config import log
+        log(f"Error calling LLM generator: {e}", "WARN")
+        llm_subject, llm_body = None, None
+        
+    if llm_subject and llm_body:
+        subject, body = llm_subject, llm_body
+    else:
+        # Safe fallback to static configuration
+        subject, body = build_email_body(job_title, company_name)
     
     # Attempt sending
     for attempt in range(max_retries + 1):
