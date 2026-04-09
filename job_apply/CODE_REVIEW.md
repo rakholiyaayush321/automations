@@ -391,7 +391,7 @@ def score_job(job_description: str, job_title: str = "") -> dict:
 ```
 
 ---
-
+ss
 #### 10. **Magic Numbers**
 ```python
 # ISSUE: Hardcoded values without explanation
