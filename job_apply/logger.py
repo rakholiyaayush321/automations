@@ -20,7 +20,7 @@ FIELDNAMES = [
 
 
 def csv_exists() -> bool:
-    return CSV_FILE.exists()
+    return CSV_FILE.exists() and CSV_FILE.stat().st_size > 0
 
 
 def read_applications() -> list[dict]:

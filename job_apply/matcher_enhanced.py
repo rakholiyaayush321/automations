@@ -91,8 +91,10 @@ def score_job(description: str, job_title: str, company_name: str = "", company_
     
     for skill, weight in SKILLS.items():
         skill_lower = skill.lower()
-        # Check for exact match or partial match
-        if skill_lower in text:
+        
+        # Check for exact bounded match using regex to prevent false positives (e.g. "ai" matching inside "email")
+        pattern = r'(?<![a-z0-9])' + re.escape(skill_lower) + r'(?![a-z0-9])'
+        if re.search(pattern, text):
             weighted_score += weight
             matched_skills.append(skill)
         else:

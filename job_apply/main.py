@@ -11,14 +11,14 @@ import argparse
 import re
 import sys
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
 from config import (
     MATCH_THRESHOLD, RESUME_PATH, SMTP_PASSWORD,
-    DAILY_TARGET, LOCATION, CANDIDATE,
+    DAILY_TARGET, LOCATION, CANDIDATE, REAPPLICATION_DAYS,
 )
 from matcher import score_job
 from dedupe import is_duplicate, mark_applied
@@ -48,12 +48,13 @@ def normalize(name: str) -> str:
     name = re.sub(r'[\s\-\._,\'\"()]+', '', name)
     return name
 
-def load_sent() -> tuple[set, dict]:
-    """Load sent companies. Returns (normalized_set, original_dict)."""
+def load_sent() -> tuple[set, dict, dict]:
+    """Load sent companies. Returns (normalized_set, original_dict, date_dict)."""
     if not SENT_FILE.exists():
-        return set(), {}
+        return set(), {}, {}
     normalized = set()
     original = {}
+    dates = {}
     with open(SENT_FILE, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
@@ -63,13 +64,35 @@ def load_sent() -> tuple[set, dict]:
             if len(parts) >= 2:
                 norm = parts[0].strip()
                 orig = parts[1].strip()
+                applied_date = parts[2].strip() if len(parts) >= 3 else None
                 normalized.add(norm)
                 original[norm] = orig
-    return normalized, original
+                if applied_date:
+                    dates[norm] = applied_date
+    return normalized, original, dates
 
 def is_already_sent(company: str) -> bool:
-    """Check if company was already sent (normalized match)."""
-    return normalize(company) in load_sent()[0]
+    """Check if company was recently sent (within reapplication window).
+    Returns False if 30+ days have passed since last application."""
+    norm_company = normalize(company)
+    _, _, dates = load_sent()
+    
+    if norm_company not in dates:
+        return False  # Never applied to this company
+    
+    try:
+        last_applied = datetime.strptime(dates[norm_company], "%Y-%m-%d").date()
+        days_since = (date.today() - last_applied).days
+        
+        if days_since >= REAPPLICATION_DAYS:
+            log(f"  [REAPPLY] {company}: {days_since} days since last application - eligible for reapply", "INFO")
+            return False  # Eligible for reapplication
+        else:
+            log(f"  [WAIT]   {company}: {REAPPLICATION_DAYS - days_since} days until reapplication eligible", "WARN")
+            return True  # Still within cooldown period
+    except (ValueError, KeyError):
+        # If date parsing fails, assume not sent
+        return False
 
 def mark_sent(company: str) -> None:
     """Append company to sent_companies.txt after successful send."""
@@ -107,7 +130,7 @@ def log_sent_report(sent: list, skipped: list, failed: list) -> None:
 
 # ── Load jobs from jobs.txt ─────────────────────────────────────────────────
 def load_jobs() -> list[dict]:
-    sent_norm, _ = load_sent()
+    _, _, dates = load_sent()  # Get all three returns now
     jobs = []
     if not JOBS_FILE.exists():
         return jobs
@@ -123,9 +146,8 @@ def load_jobs() -> list[dict]:
             company = parts[1].strip()
             email   = parts[2].strip() if len(parts) >= 3 else ""
 
-            # Skip if already sent (normalized match)
-            if normalize(company) in sent_norm:
-                log(f"  [SKIP] Already applied: {company}", "WARN")
+            # Skip if recently applied (within reapplication window)
+            if is_already_sent(company):
                 continue
 
             jobs.append({
@@ -158,7 +180,7 @@ def score_and_filter(jobs: list[dict]) -> list[dict]:
 # ── Apply to jobs ────────────────────────────────────────────────────────────
 def apply_to_jobs(jobs: list[dict], dry: bool = False) -> dict:
     results = {"sent": [], "failed": [], "skipped": [], "email_results": []}
-    sent_norm, _ = load_sent()
+    sent_norm, _, _ = load_sent()  # Get all three returns now
 
     if not jobs:
         log("No jobs to apply to.")
@@ -309,6 +331,27 @@ def run(dry: bool = False) -> None:
         _safe_print("Set GMAIL_APP_PASSWORD to enable email sending:")
         _safe_print('  setx GMAIL_APP_PASSWORD "your-app-password"')
 
+LOCK_FILE = Path(__file__).parent / "job_apply.lock"
+
+def check_and_create_lock():
+    if LOCK_FILE.exists():
+        # Clean stale lockfiles (>2 hrs)
+        if time.time() - LOCK_FILE.stat().st_mtime > 7200:
+            log("Lock file is stale (>2 hours). Removing...", "WARN")
+            try: LOCK_FILE.unlink()
+            except: pass
+        else:
+            log("Another instance of job_apply is currently running. Exiting.", "ERROR")
+            sys.exit(1)
+    
+    try: LOCK_FILE.touch()
+    except Exception as e: log(f"Could not create lockfile: {e}", "WARN")
+
+def remove_lock():
+    if LOCK_FILE.exists():
+        try: LOCK_FILE.unlink()
+        except: pass
+
 # ── Entry point ─────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ayush's Autonomous Job Application System")
@@ -317,6 +360,7 @@ if __name__ == "__main__":
     parser.add_argument("--test-email", action="store_true", help="Send test email")
     args = parser.parse_args()
 
+    check_and_create_lock()
     try:
         if args.test_email:
             test_email()
@@ -330,3 +374,5 @@ if __name__ == "__main__":
         _safe_print(f"[FATAL] {e}")
         import traceback; traceback.print_exc()
         sys.exit(1)
+    finally:
+        remove_lock()
