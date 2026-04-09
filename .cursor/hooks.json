@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_session_start.ps1"
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_session_end.ps1"
+      }
+    ],
+    "afterMCPExecution": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_track_mcp.ps1"
+      }
+    ],
+    "afterShellExecution": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_track_shell.ps1"
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_track_response.ps1"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_track_edit.ps1"
+      }
+    ],
+    "stop": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_stop_hook.ps1",
+        "loop_limit": null
+      }
+    ],
+    "preCompact": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_pre_compact.ps1"
+      }
+    ],
+    "subagentStart": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_subagent_start.ps1",
+        "matcher": ".*"
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_subagent_stop.ps1"
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_pre_tool_use.ps1",
+        "matcher": ".*"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_post_tool_use.ps1"
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_post_tool_use_failure.ps1"
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_before_shell.ps1",
+        "matcher": ".*"
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_before_mcp.ps1"
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_before_read_file.ps1"
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_before_submit_prompt.ps1",
+        "timeout": 5000
+      }
+    ],
+    "afterAgentThought": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_after_agent_thought.ps1"
+      }
+    ],
+    "beforeTabFileRead": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_before_tab_file_read.ps1"
+      }
+    ],
+    "afterTabFileEdit": [
+      {
+        "command": "powershell -ExecutionPolicy Bypass -File .cursor/scripts/ace_after_tab_file_edit.ps1"
+      }
+    ]
+  }
+}
