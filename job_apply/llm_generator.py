@@ -7,6 +7,9 @@ from typing import Tuple, Optional
 import time
 
 try:
+    import os
+    os.environ["G4F_VERSION_CHECK"] = "False"
+    os.environ["G4F_UPDATE_CHECK"] = "False"
     from g4f.client import Client
 except ImportError:
     Client = None

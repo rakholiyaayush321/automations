@@ -239,7 +239,6 @@ def select_companies(count: int = 15) -> list:
 def generate_job_title(industry: str) -> str:
     """Generate a RANDOM job title from TARGET_ROLES, weighted by industry."""
     import random
-    from config import TARGET_ROLES
     
     # AI-focused roles for AI companies
     ai_roles = ["AI Intern", "AI Trainee", "ML Intern", "ML Trainee", "Data Science Intern"]

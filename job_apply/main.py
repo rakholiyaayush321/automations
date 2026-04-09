@@ -32,9 +32,9 @@ SENT_FILE  = Path(__file__).parent / "sent_companies.txt"
 # ── Safe output ─────────────────────────────────────────────────────────────
 def _safe_print(text: str) -> None:
     try:
-        print(text)
+        print(text, flush=True)
     except UnicodeEncodeError:
-        print(text.encode("utf-8", errors="replace").decode("utf-8"))
+        print(text.encode("utf-8", errors="replace").decode("utf-8"), flush=True)
 
 def log(msg: str, level: str = "INFO") -> None:
     ts = datetime.now().strftime("%H:%M:%S")
