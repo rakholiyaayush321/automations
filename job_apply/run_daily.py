@@ -20,8 +20,8 @@ def main():
     print("=" * 60)
 
     # Step 1: Load next batch of 15 companies into jobs.txt
-    print("\n[Step 1] Loading next batch of 20 companies...")
-    rc = run(["python", "batch_loader.py", "--count", "20"])
+    print("\n[Step 1] Loading next batch of 100 companies...")
+    rc = run(["python", "batch_loader.py", "--count", "100"])
     if rc != 0:
         print(f"batch_loader failed with code {rc}")
         sys.exit(rc)

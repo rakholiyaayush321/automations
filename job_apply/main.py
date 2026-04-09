@@ -166,9 +166,12 @@ def apply_to_jobs(jobs: list[dict], dry: bool = False) -> dict:
 
     if dry:
         # Dry run: validate emails only
-        to_apply = jobs[:DAILY_TARGET]
-        log(f"Dry run: validating {len(to_apply)} job emails...")
+        to_apply = jobs
+        log(f"Dry run: validating up to {DAILY_TARGET} job emails out of {len(to_apply)} candidates...")
         for job in to_apply:
+            if len(results["sent"]) >= DAILY_TARGET:
+                log(f"Reached dry-run target of {DAILY_TARGET} successful validations. Stopping.")
+                break
             to_email = job.get("email", "").strip()
             from emailer_enhanced import validate_email
             valid, reason = validate_email(to_email)
@@ -185,10 +188,14 @@ def apply_to_jobs(jobs: list[dict], dry: bool = False) -> dict:
         results["skipped"] = [{"company": j["company"], "reason": "no password"} for j in jobs]
         return results
 
-    to_apply = jobs[:DAILY_TARGET]
-    log(f"Applying to {len(to_apply)} jobs...")
+    to_apply = jobs
+    log(f"Applying to maximum {DAILY_TARGET} jobs from pool of {len(to_apply)} candidates...")
 
     for job in to_apply:
+        if len(results["sent"]) >= DAILY_TARGET:
+            log(f"Reached daily target of {DAILY_TARGET} successful applications. Stopping.")
+            break
+
         to_email = job.get("email", "").strip()
 
         # Double-check not already sent (race condition protection)
@@ -268,7 +275,7 @@ def run(dry: bool = False) -> None:
     log("Step 0 -- Loading fresh batch from company database...")
     try:
         from batch_loader_enhanced import load_batch
-        loaded = load_batch(count=DAILY_TARGET)
+        loaded = load_batch(count=100)
         log(f"Batch loader populated jobs.txt with {loaded} companies")
     except Exception as e:
         log(f"Batch loader warning: {e} -- will use existing jobs.txt", "WARN")
