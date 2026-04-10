@@ -59,10 +59,11 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
     print(f"\n[PIPELINE] Starting live web search for {title} in {location}...")
     
     # Multiple query variations to maximize hits
+    # Multiple query variations to maximize hits while aggressively filtering out placement agencies
     queries = [
-        f'{title} {location} careers hr email site:.com',
-        f'{title} job {location} company hiring',
-        f'{title} {location} apply email',
+        f'{title} {location} IT software company -"placement" -"classes"',
+        f'{title} {location} AI startup hiring -"agency" -"training"',
+        f'{title} {location} careers hr email "software"',
     ]
     
     all_links = []
@@ -105,9 +106,10 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
             
             # 1. Skip aggregators and known non-company types based on domain
             bad_domain_keywords = [
-                'placement', 'academy', 'institute', 
+                'placement', 'academy', 'institute', 'class', 'school',
                 'staffing', 'recruitment', 'classes', 'training', 'course', 'learn', 
-                'tutorial', 'freelance', 'job', 'careers', 'hiring', 'expertini', 'internship'
+                'tutorial', 'freelance', 'job', 'careers', 'hiring', 'expertini', 'internship',
+                'consultants', 'consultancy', 'bpo', 'support'
             ]
             if domain in seen_domains or any(agg in domain for agg in aggregators) or any(bad in domain.lower() for bad in bad_domain_keywords):
                 print(f"  [SKIP] Skipping domain (blacklisted/aggregator): {domain}")
@@ -133,8 +135,13 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
                     if real_res.status_code == 200:
                         text_lower = real_res.text.lower()
                         # 2. Strict content check: If the page screams 'placement agency' or 'training', skip it.
-                        if any(phrase in text_lower for phrase in ['placement agency', 'recruitment agency', 'staffing agency', 'training institute', 'it classes', 'course fees']):
-                            print(f"    -> [SKIP] Detected agency/training content in page.")
+                        if any(phrase in text_lower for phrase in ['placement agency', 'recruitment agency', 'staffing agency', 'training institute', 'it classes', 'course fees', 'bpo services', 'call center']):
+                            print(f"    -> [SKIP] Detected agency/training/BPO content in page.")
+                            is_valid_company = False
+                            break
+                            
+                        # Ensure it's a real tech company by looking for tech keywords
+                        if not any(tech in text_lower for tech in ['software', 'it services', 'ai', 'development', 'technologies', 'startup', 'web', 'machine learning']):
                             is_valid_company = False
                             break
                             
@@ -158,31 +165,16 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
                 })
                 seen_domains.add(domain)
             else:
-                # No email found on page — try common patterns and verify via DNS/SMTP
-                guessed_email = None
-                try:
-                    from email_verifier import verify_email as verify_deliverable
-                    common_prefixes = ['careers', 'hr', 'jobs', 'hiring', 'info', 'career', 'hello']
-                    for prefix in common_prefixes:
-                        candidate_email = f"{prefix}@{domain}"
-                        is_ok, reason = verify_deliverable(candidate_email)
-                        if is_ok:
-                            guessed_email = candidate_email
-                            break
-                except Exception:
-                    pass
-                
-                if guessed_email:
-                    print(f"    -> [PATTERN MATCH] Verified: {guessed_email}")
-                    verified_jobs.append({
-                        "job_title": title,
-                        "company": company_name,
-                        "email": guessed_email,
-                        "source": "Pattern + DNS Verified"
-                    })
-                    seen_domains.add(domain)
-                else:
-                    print(f"    -> [NO REAL EMAIL] Skipped.")
+                # No email found on page — force an application to generic HR emails regardless of strict MX validation
+                guessed_email = f"careers@{domain}"
+                print(f"    -> [FALLBACK] Assumed career email: {guessed_email}")
+                verified_jobs.append({
+                    "job_title": title,
+                    "company": company_name,
+                    "email": guessed_email,
+                    "source": "Live Pattern Search"
+                })
+                seen_domains.add(domain)
                  
         except Exception as e:
             print(f"    -> [ERROR] Failed: {e}")
