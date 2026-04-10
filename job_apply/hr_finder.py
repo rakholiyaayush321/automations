@@ -145,11 +145,11 @@ def _search_ddg(company: str) -> Optional[Tuple[str, str]]:
         return None
 
     queries = [
-        f'{company} HR manager LinkedIn India',
+        f'{company} HR manager LinkedIn "Ahmedabad" OR "Pune"',
         f'{company} talent acquisition manager LinkedIn',
-        f'site:linkedin.com "{company}" HR manager',
+        f'site:linkedin.com "{company}" HR manager Ahmedabad Pune',
         f'site:indeed.com "{company}" hiring manager',
-        f'"{company}" human resources manager India',
+        f'"{company}" human resources manager "Ahmedabad" OR "Pune"',
         f'"{company}" recruitment lead',
     ]
 

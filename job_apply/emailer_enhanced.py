@@ -213,7 +213,7 @@ def send_email_with_retry(
     hr_role = ""
     try:
         from hr_finder import find_hr_contact
-        hr_info = find_hr_contact(company_name, email=email_address)
+        hr_info = find_hr_contact(company_name, email=to_email)
         if hr_info["found"]:
             hr_name = hr_info["first_name"]
             hr_role = hr_info["role"]
