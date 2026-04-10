@@ -319,8 +319,8 @@ def run(dry: bool = False) -> None:
         # Step 0: Load companies — use varied search queries per round
         log("Step 0 -- Loading companies...")
         
-        if os.path.exists(JOBS_FILE) and os.path.getsize(JOBS_FILE) > 50:
-            log("Using existing jobs.txt, skipping batch loader.")
+        if round_num == 1 and os.path.exists(JOBS_FILE) and os.path.getsize(JOBS_FILE) > 50:
+            log("Using existing jobs.txt, skipping batch loader for Round 1.")
             loaded = 50
         else:
             try:

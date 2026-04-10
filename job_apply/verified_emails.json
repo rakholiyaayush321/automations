@@ -388,5 +388,145 @@
     "valid": true,
     "reason": "Verified (MX records found; SMTP accepted recipient)",
     "checked_at": "2026-04-10T13:50:59.647555"
+  },
+  "hr@data-nectar.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:01.096143"
+  },
+  "hr@wetechnolabs.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
+    "checked_at": "2026-04-10T17:58:01.973138"
+  },
+  "hr@devstree.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:04.887915"
+  },
+  "info@krishangtechnolab.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:07.087555"
+  },
+  "hr@equitysoft.in": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:09.033255"
+  },
+  "info@aivid.ai": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T17:58:09.790695"
+  },
+  "vivek@prepseed.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:12.059930"
+  },
+  "careers@glib.ai": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:13.956436"
+  },
+  "info@yaraa.io": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T17:58:15.800176"
+  },
+  "hr@softcolon.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:18.154144"
+  },
+  "hr@artemhealthtech.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:20.042007"
+  },
+  "hr@quantumbot.in": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:22.531530"
+  },
+  "career@prioxis.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T17:58:23.013719"
+  },
+  "hr@nettyfy.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T17:58:24.817098"
+  },
+  "hr@marutitech.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:26.254033"
+  },
+  "hr@citrusbug.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:27.817326"
+  },
+  "career@bytestechnolab.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:30.280332"
+  },
+  "hello@zealousweb.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:32.192808"
+  },
+  "hr@spaceotechnologies.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T17:58:33.881418"
+  },
+  "info@genesisai.io": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T17:58:35.625025"
+  },
+  "careers@stanzaliving.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T18:24:36.340961"
+  },
+  "careers@goodfirms.co": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T18:24:38.704203"
+  },
+  "careers@techbehemoths.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T18:24:40.097868"
+  },
+  "careers@latitudetechnolabs.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T18:24:41.491397"
+  },
+  "info@zestratech.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T18:24:42.597676"
+  },
+  "info@appeaktech.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T18:24:50.425836"
+  },
+  "contact@levorotech.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T18:24:51.898209"
+  },
+  "info@elinsys.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T18:24:52.441748"
   }
 }
