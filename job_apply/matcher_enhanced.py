@@ -122,10 +122,15 @@ def score_job(description: str, job_title: str, company_name: str = "", company_
     # Clamp to 0-100
     final_score = max(0, min(100, final_score))
     
+    # Strict rejection if size is over 700
+    is_passing = final_score >= QUALITY_THRESHOLD
+    if size_category == "LARGE":
+        is_passing = False
+    
     return {
         'score': weighted_score,
         'match_pct': round(match_pct, 1),
-        'passes': final_score >= QUALITY_THRESHOLD,
+        'passes': is_passing,
         'matched_skills': matched_skills,
         'is_priority': is_priority,
         'size_category': size_category,
@@ -147,9 +152,13 @@ def score_company_only(company_name: str, company_size: str = "") -> Dict:
         score += PRIORITY_BONUS
     if not is_preferred:
         score -= 10
+        
+    is_passing = score >= QUALITY_THRESHOLD
+    if size_category == "LARGE":
+        is_passing = False
     
     return {
-        'passes': score >= QUALITY_THRESHOLD,
+        'passes': is_passing,
         'is_priority': is_priority,
         'size_category': size_category,
         'is_preferred_size': is_preferred,

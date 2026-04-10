@@ -28,9 +28,17 @@ def log(msg: str, level: str = "INFO") -> None:
     prefix = {"INFO": "[INFO]", "WARN": "[WARN]", "ERROR": "[ERROR]"}
     _safe_print(f"{prefix.get(level, '[MSG]')} [{ts}] {msg}")
 
-def generate_cold_email(job_title: str, company_name: str, timeout: int = 20) -> Tuple[Optional[str], Optional[str]]:
+def generate_cold_email(job_title: str, company_name: str, hr_name: str = "", hr_role: str = "", timeout: int = 20) -> Tuple[Optional[str], Optional[str]]:
     """
     Generates a personalized cold email using a free LLM proxy (g4f).
+    
+    Args:
+        job_title: The role being applied for
+        company_name: Target company name
+        hr_name: HR contact's first name (e.g., "Priya") — used for greeting
+        hr_role: HR contact's role (e.g., "HR Manager") — for context
+        timeout: Max seconds to wait for AI generation
+    
     Returns (subject, body). Returns (None, None) if it fails or times out.
     """
     if not Client:
@@ -58,12 +66,17 @@ def generate_cold_email(job_title: str, company_name: str, timeout: int = 20) ->
 
             skills_str = ", ".join(CANDIDATE["skills"][:8])
 
+            # Build greeting instruction based on whether we have HR name
+            if hr_name:
+                greeting_instruction = f"Address the email to '{hr_name}' (their role: {hr_role or 'HR Manager'}). Use 'Dear {hr_name},' as the greeting."
+            else:
+                greeting_instruction = "Use 'Dear Hiring Manager,' as the greeting. Do NOT use placeholder brackets like [Hiring Manager]."
+            
             system_msg = (
                 "You are an expert career consultant writing a professional cold email for a client. "
                 "Output exactly two parts: Line 1 must be 'Subject: [Your Subject]'. "
-                "The rest must be the email body. Do NOT use placeholder brackets like [Hiring Manager], "
-                "instead use general greetings like 'Dear Hiring Team'. "
-                "Be warm but direct, mention the resume is attached, and logically weave in the candidate's specific details provided. Keep the email concise."
+                f"The rest must be the email body. {greeting_instruction} "
+                "Be warm but direct, mention the resume is attached, and logically weave in the candidate's specific details provided. Keep the email concise (under 200 words)."
             )
 
             user_msg = (

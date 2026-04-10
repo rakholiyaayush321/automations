@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from typing import List
 
 EMAIL_REGEX = re.compile(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+')
-VALID_PREFIXES = ('hr@', 'careers@', 'jobs@', 'talent@', 'recruitment@', 'hiring@', 'career@')
+VALID_PREFIXES = ('hr@', 'careers@', 'jobs@', 'talent@', 'recruitment@', 'hiring@', 'career@', 'info@', 'contact@')
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -42,7 +42,7 @@ def extract_valid_emails(html_text: str, domain: str) -> str:
     # Clean matches
     for email in found_emails:
         email = email.lower()
-        if any(bad in email for bad in ['noreply', 'support', 'sales', 'info', 'admin', 'test', 'example', 'sentry', 'complaint', 'help', 'contact']):
+        if any(bad in email for bad in ['noreply', 'support', 'sales', 'admin', 'test', 'example', 'sentry', 'complaint', 'help']):
             continue
             
         # Prioritize matching exact HR prefixes
@@ -88,7 +88,7 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
     verified_jobs = []
     seen_domains = set()
     
-    aggregators = ['linkedin', 'naukri', 'indeed', 'glassdoor', 'monster', 'foundit', 
+    aggregators = ['naukri', 'glassdoor', 'monster', 'foundit', 
                    'hirist', 'cutshort', 'simplyhired', 'jobsora', 'internshala', 
                    'place1india', 'jooble', 'ambitionbox', 'techgig', 'shine', 
                    'freshersworld', 'naukrigulf', 'apna', 'iimjobs', 'timesjobs',
@@ -103,8 +103,15 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
             domain = real_url.split("://")[-1].split("/")[0].replace("www.", "")
             company_name = domain.split(".")[0].capitalize()
             
-            if domain in seen_domains or any(agg in domain for agg in aggregators):
-                 continue
+            # 1. Skip aggregators and known non-company types based on domain
+            bad_domain_keywords = [
+                'placement', 'academy', 'institute', 
+                'staffing', 'recruitment', 'classes', 'training', 'course', 'learn', 
+                'tutorial', 'freelance', 'job', 'careers', 'hiring', 'expertini', 'internship'
+            ]
+            if domain in seen_domains or any(agg in domain for agg in aggregators) or any(bad in domain.lower() for bad in bad_domain_keywords):
+                print(f"  [SKIP] Skipping domain (blacklisted/aggregator): {domain}")
+                continue
             
             # Try the main URL first, then careers/contact pages
             pages_to_try = [
@@ -117,12 +124,20 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
             
             print(f"  [CRAWL] Scanning company: {domain}")
             best_email = None
+            is_valid_company = True
             
             for page_url in pages_to_try:
                 try:
                     time.sleep(random.uniform(0.5, 1.5))
                     real_res = session.get(page_url, headers={"User-Agent": random.choice(USER_AGENTS)}, timeout=8)
                     if real_res.status_code == 200:
+                        text_lower = real_res.text.lower()
+                        # 2. Strict content check: If the page screams 'placement agency' or 'training', skip it.
+                        if any(phrase in text_lower for phrase in ['placement agency', 'recruitment agency', 'staffing agency', 'training institute', 'it classes', 'course fees']):
+                            print(f"    -> [SKIP] Detected agency/training content in page.")
+                            is_valid_company = False
+                            break
+                            
                         found = extract_valid_emails(real_res.text, domain)
                         if found:
                             best_email = found
@@ -130,6 +145,9 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
                 except Exception:
                     continue
             
+            if not is_valid_company:
+                continue
+
             if best_email:
                 print(f"    -> [VERIFIED SUCCESS] Extracted HR email: {best_email}")
                 verified_jobs.append({
@@ -140,7 +158,31 @@ def run_dynamic_pipeline(title="Python Developer", location="Ahmedabad", count=5
                 })
                 seen_domains.add(domain)
             else:
-                 print(f"    -> [NO REAL EMAIL] Skipped.")
+                # No email found on page — try common patterns and verify via DNS/SMTP
+                guessed_email = None
+                try:
+                    from email_verifier import verify_email as verify_deliverable
+                    common_prefixes = ['careers', 'hr', 'jobs', 'hiring', 'info', 'career', 'hello']
+                    for prefix in common_prefixes:
+                        candidate_email = f"{prefix}@{domain}"
+                        is_ok, reason = verify_deliverable(candidate_email)
+                        if is_ok:
+                            guessed_email = candidate_email
+                            break
+                except Exception:
+                    pass
+                
+                if guessed_email:
+                    print(f"    -> [PATTERN MATCH] Verified: {guessed_email}")
+                    verified_jobs.append({
+                        "job_title": title,
+                        "company": company_name,
+                        "email": guessed_email,
+                        "source": "Pattern + DNS Verified"
+                    })
+                    seen_domains.add(domain)
+                else:
+                    print(f"    -> [NO REAL EMAIL] Skipped.")
                  
         except Exception as e:
             print(f"    -> [ERROR] Failed: {e}")

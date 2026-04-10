@@ -65,7 +65,10 @@ TARGET_ROLES = [
 
 # ── Location Filter ──────────────────────────────────────────────────────────
 LOCATION = "Ahmedabad"
-LOCATION_FILTERS = ["ahmedabad", "gujarat", "remote", "india"]
+LOCATION_FILTERS = [
+    "ahmedabad",
+    "pune",
+]
 
 # ── Priority Companies (Higher chance of being selected) ─────────────────────
 PRIORITY_COMPANIES = [
@@ -77,6 +80,9 @@ PRIORITY_COMPANIES = [
     "TatvaSoft",
     "Bacancy",
     "Radixweb",
+    "Sparx IT Solutions",
+    "kenex ai",
+    "",
     "Crest Data Systems",
     "MindInventory",
     "Simform",
@@ -86,8 +92,8 @@ PRIORITY_COMPANIES = [
 COMPANY_SIZES = {
     "STARTUP": (1, 50),
     "SMALL": (51, 200),
-    "MID": (201, 500),
-    "LARGE": (501, float('inf')),
+    "MID": (201, 700),
+    "LARGE": (701, float('inf')),
 }
 
 PREFERRED_SIZES = ["STARTUP", "SMALL", "MID"]  # Avoid LARGE
@@ -110,7 +116,7 @@ EMAIL_PATTERNS = [
 EMAIL_TEMPLATES = {
     "ai_ml": {
         "subject": "Application for AI/ML Intern Position - {name}",
-        "body": """Dear Hiring Manager,
+        "body": """{greeting},
 
 I am writing to express my interest in the AI/ML position at {company}. With hands-on experience in Python, PyTorch, and LangChain, I believe I would be a strong addition to your team.
 
@@ -134,7 +140,7 @@ Best regards,
     
     "python_dev": {
         "subject": "Application for Python Developer Role - {name}",
-        "body": """Dear Hiring Manager,
+        "body": """{greeting},
 
 I am writing to apply for the Python Developer position at {company}. My background in Python development, FastAPI, and AI integration makes me a strong fit for your team.
 
@@ -158,7 +164,7 @@ Best regards,
     
     "fresher": {
         "subject": "Application for Fresher Position - {name}",
-        "body": """Dear Hiring Manager,
+        "body": """{greeting},
 
 I am a recent Computer Engineering graduate seeking to start my career at {company}. With strong Python skills and AI/ML project experience, I am eager to contribute and learn.
 
@@ -182,7 +188,7 @@ Best regards,
     
     "automation": {
         "subject": "Application for Automation/AI Role - {name}",
-        "body": """Dear Hiring Manager,
+        "body": """{greeting},
 
 I am writing to express my interest in the automation position at {company}. With expertise in Python, AI tools, and process automation, I can add immediate value to your team.
 
@@ -318,7 +324,7 @@ def build_email_subject(job_title: str, company_name: str) -> str:
     return f"Application for {job_title} - {CANDIDATE['name']}"
 
 
-def build_email_body(job_title: str, company_name: str, matched_skills: list = None) -> str:
+def build_email_body(job_title: str, company_name: str, greeting: str = "Dear Hiring Manager") -> str:
     """Generate personalized email body using templates."""
     template_key = get_email_template(job_title, 70)
     template = EMAIL_TEMPLATES[template_key]
@@ -346,7 +352,8 @@ def build_email_body(job_title: str, company_name: str, matched_skills: list = N
         cgpa=CANDIDATE["cgpa"],
         experience=CANDIDATE["experience"],
         skills=skills_str,
-        project=project
+        project=project,
+        greeting=greeting
     )
     
     subject = template["subject"].format(

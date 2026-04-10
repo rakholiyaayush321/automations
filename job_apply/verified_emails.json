@@ -1,0 +1,392 @@
+{
+  "careers@codenicely.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.801479"
+  },
+  "careers@speechmatics.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.817966"
+  },
+  "careers@healx.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.828401"
+  },
+  "careers@quantailab.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.839581"
+  },
+  "careers@technoindia.edu": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.865327"
+  },
+  "careers@webel.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.896561"
+  },
+  "hr@indusnet.co.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.914623"
+  },
+  "careers@mindfiresolutions.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.932965"
+  },
+  "careers@algoscale.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.949158"
+  },
+  "careers@jeavio.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.965998"
+  },
+  "careers@datametica.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.981302"
+  },
+  "careers@quantiphi.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:14.994001"
+  },
+  "careers@clairvoyantsoft.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.012923"
+  },
+  "careers@latentview.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.034032"
+  },
+  "careers@haptik.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.047198"
+  },
+  "careers@embibe.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.058704"
+  },
+  "careers@graphcore.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.079343"
+  },
+  "careers@benevolent.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.095620"
+  },
+  "careers@faculty.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.116333"
+  },
+  "careers@stability.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.134197"
+  },
+  "careers@peak.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.157064"
+  },
+  "careers@wayve.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:13:15.174642"
+  },
+  "careers@in.indeed.com": {
+    "valid": true,
+    "reason": "Verified (No MX but A record exists (implicit MX); Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
+    "checked_at": "2026-04-10T11:13:35.294207"
+  },
+  "careers@linkedin.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:13:50.743401"
+  },
+  "careers@in.linkedin.com": {
+    "valid": true,
+    "reason": "Verified (No MX but A record exists (implicit MX); Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
+    "checked_at": "2026-04-10T11:14:23.261362"
+  },
+  "careers@india.recruit.net": {
+    "valid": true,
+    "reason": "Verified (No MX but A record exists (implicit MX); Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
+    "checked_at": "2026-04-10T11:15:08.326266"
+  },
+  "careers@f6s.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:16:19.032666"
+  },
+  "hello@echoloc.ai": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:16:21.431900"
+  },
+  "hr@enfintechnologies.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:16:22.161860"
+  },
+  "career@inaiworlds.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:16:24.016616"
+  },
+  "info@nexgits.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:16:24.347398"
+  },
+  "info@careerhub.org.in": {
+    "valid": true,
+    "reason": "Verified (MX records found; Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
+    "checked_at": "2026-04-10T11:16:35.648150"
+  },
+  "careers@expertia.ai": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:21:13.525413"
+  },
+  "careers@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:19.925237"
+  },
+  "hr@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:25.056442"
+  },
+  "jobs@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:30.094533"
+  },
+  "hiring@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:35.166011"
+  },
+  "info@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:40.217040"
+  },
+  "career@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:45.265845"
+  },
+  "hello@spectricssolutions.com": {
+    "valid": false,
+    "reason": "MX check failed: DNS lookup timed out",
+    "checked_at": "2026-04-10T11:22:50.328845"
+  },
+  "careers@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:02.273121"
+  },
+  "hr@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:03.872774"
+  },
+  "jobs@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:05.750035"
+  },
+  "hiring@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:07.590471"
+  },
+  "info@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:09.338514"
+  },
+  "career@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:11.287518"
+  },
+  "hello@iimaventures.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:23:13.125711"
+  },
+  "careers@adzuna.in": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:24:00.638171"
+  },
+  "careers@crossover.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:24:15.186544"
+  },
+  "surabhi.singarakhia@actowizsolutions.com": {
+    "valid": false,
+    "reason": "SMTP rejected: Mailbox does not exist (550)",
+    "checked_at": "2026-04-10T11:24:38.654572"
+  },
+  "press@truelancer.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T11:24:40.472932"
+  },
+  "careers@technource.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:36:36.243348"
+  },
+  "careers@hynts.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:36:43.301190"
+  },
+  "careers@ihubgujarat.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:39:17.137404"
+  },
+  "careers@zoho.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:39:31.151268"
+  },
+  "careers@talenthivenetwork.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:40:56.775177"
+  },
+  "careers@bayt.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:42:32.398711"
+  },
+  "careers@x.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:43:39.714802"
+  },
+  "careers@recruit.alifconsulting.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:45:06.360997"
+  },
+  "careers@unstop.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:52:02.628652"
+  },
+  "careers@engineersconnect.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:53:44.709282"
+  },
+  "careers@rysun.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:00.950792"
+  },
+  "hr@w3villa.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:00.962590"
+  },
+  "careers@poly.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:00.976524"
+  },
+  "careers@secondmind.ai": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:00.987467"
+  },
+  "careers@suntecgroup.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:00.999847"
+  },
+  "careers@tigeranalytics.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.013859"
+  },
+  "careers@sigmoid.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.030180"
+  },
+  "careers@onfido.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.046846"
+  },
+  "careers@cognizant.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.059874"
+  },
+  "careers@itcinfotech.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.072851"
+  },
+  "careers@mu-sigma.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.084308"
+  },
+  "careers@deepmind.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T11:54:01.097940"
+  },
+  "careers@indicussoftware.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T12:00:40.679416"
+  },
+  "careers@labmentix.in": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T12:12:50.930524"
+  },
+  "careers@india.indeed.com": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T12:15:34.402380"
+  },
+  "careers@career.rapidise.co": {
+    "valid": true,
+    "reason": "Verified (DNS library not available, skipping MX check; No MX hosts available — assuming valid (will verify on send))",
+    "checked_at": "2026-04-10T12:16:31.591346"
+  },
+  "rakholiyaayush894@gmail.com": {
+    "valid": true,
+    "reason": "Verified (MX records found; SMTP accepted recipient)",
+    "checked_at": "2026-04-10T13:50:59.647555"
+  }
+}

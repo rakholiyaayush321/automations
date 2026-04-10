@@ -10,6 +10,7 @@ Commands:
 import argparse
 import re
 import sys
+import os
 import time
 from datetime import date, datetime
 from pathlib import Path
@@ -18,7 +19,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from config import (
     MATCH_THRESHOLD, RESUME_PATH, SMTP_PASSWORD,
-    DAILY_TARGET, LOCATION, CANDIDATE,
+    DAILY_TARGET, LOCATION, CANDIDATE, CSV_FILE,
+    JOBS_FILE,
 )
 from matcher import score_job
 from dedupe import is_duplicate, mark_applied
@@ -271,45 +273,189 @@ def run(dry: bool = False) -> None:
     log(f"Starting job pipeline -- {'DRY RUN' if dry else 'LIVE'}")
     log(f"Target: {DAILY_TARGET} apps | Location: {LOCATION} | Threshold: {MATCH_THRESHOLD}%")
 
-    # Step 0: Auto-load fresh batch of jobs from verified database
-    log("Step 0 -- Loading fresh batch from company database...")
-    try:
-        from batch_loader_enhanced import load_batch
-        loaded = load_batch(count=100)
-        log(f"Batch loader populated jobs.txt with {loaded} companies")
-    except Exception as e:
-        log(f"Batch loader warning: {e} -- will use existing jobs.txt", "WARN")
+    total_sent = 0
+    total_skipped = 0
+    total_failed = 0
+    all_sent_companies = []
+    max_rounds = 20   # Increased for wider geo search coverage
+    round_num = 0
 
-    # Step 1: Load jobs
-    log("Step 1 -- Loading jobs from jobs.txt...")
-    all_jobs = load_jobs()
-    log(f"Jobs loaded: {len(all_jobs)}")
+    # ONLY Ahmedabad and Pune - as requested
+    SEARCH_QUERIES = [
+        # ── Ahmedabad ──
+        ("AI Intern", "Ahmedabad"),
+        ("Python Developer", "Ahmedabad"),
+        ("ML Engineer", "Ahmedabad"),
+        ("Data Science Intern", "Ahmedabad"),
+        ("Backend Developer Python", "Ahmedabad"),
+        ("NLP Engineer", "Ahmedabad"),
+        ("FastAPI Developer", "Ahmedabad"),
+        ("Python Django Developer", "Ahmedabad"),
+        ("AI startup", "Ahmedabad hiring"),
+        ("Python automation engineer", "Ahmedabad"),
+        ("Software Developer", "Ahmedabad"),
+        ("AI ML company", "Ahmedabad careers"),
+        # ── Pune ──
+        ("AI Developer", "Pune"),
+        ("Python Intern", "Pune"),
+        ("ML Intern", "Pune"),
+        ("Python Developer", "Pune"),
+        ("Data Science Intern", "Pune"),
+        ("AI ML Engineer", "Pune"),
+        ("Backend Developer", "Pune"),
+        ("Deep Learning Engineer", "Pune"),
+        ("Software Developer Python", "Pune"),
+        ("AI startup", "Pune hiring"),
+    ]
 
-    if not all_jobs:
-        log("No new jobs in jobs.txt. All companies already applied.", "WARN")
-        return
+    while total_sent < DAILY_TARGET and round_num < max_rounds:
+        round_num += 1
+        remaining = DAILY_TARGET - total_sent
+        
+        log(f"\n{'='*60}")
+        log(f"ROUND {round_num} | Sent so far: {total_sent}/{DAILY_TARGET} | Need: {remaining} more")
+        log(f"{'='*60}")
 
-    # Step 2: Score & filter
-    log("Step 2 -- Scoring and filtering...")
-    filtered = score_and_filter(all_jobs)
-    log(f"Jobs passing threshold: {len(filtered)}")
+        # Step 0: Load companies — use varied search queries per round
+        log("Step 0 -- Loading companies...")
+        
+        if os.path.exists(JOBS_FILE) and os.path.getsize(JOBS_FILE) > 50:
+            log("Using existing jobs.txt, skipping batch loader.")
+            loaded = 50
+        else:
+            try:
+                from batch_loader_enhanced import load_batch, ENHANCED_COMPANIES, load_sent, normalize
+                
+                # First try static DB
+                loaded = load_batch(count=remaining + 10)  # Load extra to account for skips
+                
+                # If static DB gave nothing, use dynamic_sourcing directly with varied queries
+                if loaded == 0:
+                    log("Static DB exhausted. Running direct web search...")
+                    from dynamic_sourcing import run_dynamic_pipeline
+                    
+                    # Pick queries for this round (cycle through them)
+                    start_idx = ((round_num - 1) * 2) % len(SEARCH_QUERIES)
+                    queries_this_round = SEARCH_QUERIES[start_idx:start_idx+3]
+                    if not queries_this_round:
+                        queries_this_round = SEARCH_QUERIES[:3]
+                    
+                    web_jobs = []
+                    sent_names = load_sent()
+                    for title, location in queries_this_round:
+                        if len(web_jobs) >= remaining + 5:
+                            break
+                        results = run_dynamic_pipeline(title, location, count=remaining + 5 - len(web_jobs))
+                        for r in results:
+                            norm = normalize(r["company"])
+                            if norm not in sent_names:
+                                web_jobs.append(r)
+                                sent_names.add(norm)
+                    
+                    if web_jobs:
+                        # Write to jobs.txt
+                        with open(JOBS_FILE, 'w', encoding='utf-8') as f:
+                            f.write(f"# Round {round_num} web search results\n\n")
+                            for j in web_jobs:
+                                f.write(f"{j['job_title']} | {j['company']} | {j['email']}\n")
+                        log(f"Web search found {len(web_jobs)} new companies")
+                        loaded = len(web_jobs)
+                    else:
+                        log("No new companies found this round. Trying next query set...", "WARN")
+                        continue
+                        
+            except Exception as e:
+                log(f"Batch loader error: {e}", "WARN")
+                import traceback; traceback.print_exc()
+                continue
 
-    if not filtered:
-        log("No jobs passed. Exiting.")
-        return
+        # Step 1: Load jobs
+        log("Step 1 -- Loading jobs from jobs.txt...")
+        all_jobs = load_jobs()
+        log(f"Jobs loaded: {len(all_jobs)}")
 
-    # Step 3: Apply
-    log("Step 3 -- Applying to jobs...")
-    results = apply_to_jobs(filtered, dry=dry)
+        if not all_jobs:
+            log("No jobs in jobs.txt this round. Trying next...", "WARN")
+            continue
+
+        # Step 2: Score & filter
+        log("Step 2 -- Scoring and filtering...")
+        filtered = score_and_filter(all_jobs)
+        log(f"Jobs passing threshold: {len(filtered)}")
+
+        if not filtered:
+            log("No jobs passed filter. Trying next round...", "WARN")
+            continue
+
+        # Step 2.5: Verify emails (only in live mode)
+        if not dry:
+            log("Step 2.5 -- Verifying email deliverability...")
+            try:
+                from email_verifier import verify_email as verify_deliverable
+                verified_jobs = []
+                for job in filtered:
+                    email = job.get("email", "").strip()
+                    if not email:
+                        continue
+                    is_ok, reason = verify_deliverable(email)
+                    if is_ok:
+                        log(f"  [OK]   {job['company']}: {email}")
+                        verified_jobs.append(job)
+                    else:
+                        log(f"  [FAIL] {job['company']}: {email} -- {reason}", "WARN")
+                log(f"Verified: {len(verified_jobs)}/{len(filtered)}")
+                filtered = verified_jobs
+            except Exception as e:
+                log(f"Verification error: {e}", "WARN")
+
+        if not filtered:
+            log("No verified jobs this round. Trying next...", "WARN")
+            continue
+
+        # Step 3: Apply (only send what we still need)
+        jobs_to_send = filtered[:remaining]
+        log(f"Step 3 -- Sending {len(jobs_to_send)} emails...")
+        results = apply_to_jobs(jobs_to_send, dry=dry)
+
+        # Track totals
+        round_sent = len(results.get("sent", []))
+        round_skipped = len(results.get("skipped", []))
+        round_failed = len(results.get("failed", []))
+        
+        total_sent += round_sent
+        total_skipped += round_skipped
+        total_failed += round_failed
+        all_sent_companies.extend(results.get("sent", []))
+
+        log(f"Round {round_num} result: Sent={round_sent} | Skipped={round_skipped} | Failed={round_failed}")
+        log(f"Total progress: {total_sent}/{DAILY_TARGET} sent")
+
+        if total_sent >= DAILY_TARGET:
+            break
+
+        # Small delay before next round
+        if not dry:
+            log("Waiting 10s before next search round...")
+            import time; time.sleep(10)
+
+    # Final summary
+    log(f"\n{'='*60}")
+    log(f"PIPELINE COMPLETE")
+    log(f"{'='*60}")
+    log(f"Total rounds: {round_num}")
+    log(f"Total sent: {total_sent}/{DAILY_TARGET}")
+    log(f"Total skipped: {total_skipped}")
+    log(f"Total failed: {total_failed}")
+    if total_sent >= DAILY_TARGET:
+        log(f"TARGET REACHED! {total_sent} applications sent successfully!")
+    else:
+        log(f"Target not fully met. Sent {total_sent}/{DAILY_TARGET}.", "WARN")
 
     # Email delivery report
     try:
         print_email_report()
     except Exception:
         pass
-
-    # Final report
-    log_sent_report(results["sent"], results["skipped"], results["failed"])
 
     if not dry and not SMTP_PASSWORD:
         _safe_print("")

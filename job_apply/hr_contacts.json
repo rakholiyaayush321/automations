@@ -1,0 +1,26 @@
+{
+  "simform": {
+    "name": "Samantha Fernandes",
+    "role": "Head Of Hr",
+    "source": "web_search",
+    "checked_at": "2026-04-10T02:11:16.106491"
+  },
+  "solulab": {
+    "name": "Senior Manager",
+    "role": "Human Resources",
+    "source": "web_search",
+    "checked_at": "2026-04-10T02:11:16.911699"
+  },
+  "tatvasoft": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-10T02:15:55.891235"
+  },
+  "mindinventory": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-10T02:12:30.987404"
+  }
+}

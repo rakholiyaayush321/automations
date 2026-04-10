@@ -152,6 +152,8 @@ ENHANCED_COMPANIES = [
     ("Accion Labs", "accionlabs.com", "200-500", "careers@accionlabs.com", "Software"),
     ("Coditas", "coditas.com", "100-300", "careers@coditas.com", "Software"),
     ("Forcepoint", "forcepoint.com", "500+", "careers@forcepoint.com", "Software"),
+
+    # Non-Ahmedabad/Pune categories removed based on user request.
 ]
 
 
@@ -257,7 +259,9 @@ def generate_job_title(industry: str) -> str:
 
 
 def load_batch(count: int = 20) -> int:
-    """Load next batch of companies into jobs.txt from verified database."""
+    """Load next batch of companies into jobs.txt from verified database.
+    Falls back to web search if static database is exhausted.
+    """
     
     print(f"\n{'='*60}", flush=True)
     print(f"[BATCH LOADER] Loading {count} companies with diverse roles...", flush=True)
@@ -272,6 +276,39 @@ def load_batch(count: int = 20) -> int:
         name, website, size, email, priority, industry = sc
         job_title = generate_job_title(industry)
         total_companies.append((name, website, size, email, priority, industry, job_title))
+    
+    # If static database doesn't have enough, try web search for real companies
+    remaining = count - len(total_companies)
+    if remaining > 0:
+        print(f"\n[BATCH LOADER] Static DB only has {len(total_companies)} new companies.", flush=True)
+        print(f"[BATCH LOADER] Searching web for {remaining} more real AI/ML companies...", flush=True)
+        try:
+            from dynamic_sourcing import run_dynamic_pipeline
+            # Search for real companies using multiple queries
+            search_queries = [
+                ("AI Intern", "Ahmedabad"),
+                ("Python Developer", "Ahmedabad"),
+                ("ML Intern", "Pune"),
+            ]
+            web_companies = []
+            for title, location in search_queries:
+                if len(web_companies) >= remaining:
+                    break
+                results = run_dynamic_pipeline(title, location, count=remaining - len(web_companies))
+                web_companies.extend(results)
+            
+            # Add web-sourced companies (they already have verified emails)
+            sent = load_sent()
+            for wc in web_companies:
+                norm_name = normalize(wc["company"])
+                if norm_name not in sent:
+                    total_companies.append((
+                        wc["company"], "", "10-50", wc["email"], 
+                        40, "AI", wc["job_title"]
+                    ))
+            print(f"[BATCH LOADER] Added {len(web_companies)} companies from web search.", flush=True)
+        except Exception as e:
+            print(f"[BATCH LOADER] Web search fallback failed: {e}", flush=True)
     
     if not total_companies:
         print("No new companies available!")

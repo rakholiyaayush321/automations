@@ -188,11 +188,48 @@ def send_email_with_retry(
             'timestamp': datetime.now().isoformat()
         }
     
+    # Pre-send verification: DNS MX + SMTP RCPT TO check
+    try:
+        from email_verifier import verify_email as verify_deliverable
+        is_deliverable, verify_reason = verify_deliverable(to_email)
+        if not is_deliverable:
+            print(f"  [VERIFY-FAIL] {to_email}: {verify_reason}")
+            tracker.save_invalid_email(to_email, f"Pre-send verification: {verify_reason}")
+            return {
+                'status': 'skipped',
+                'message': f"Pre-send verification: {verify_reason}",
+                'attempts': 0,
+                'timestamp': datetime.now().isoformat()
+            }
+        else:
+            print(f"  [VERIFY-OK] {to_email}: {verify_reason}")
+    except ImportError:
+        print(f"  [WARN] email_verifier not available, skipping pre-send check")
+    except Exception as e:
+        print(f"  [WARN] Pre-send verification error: {e}")
+    
+    # Look up HR manager name for personalized greeting
+    hr_name = ""
+    hr_role = ""
+    try:
+        from hr_finder import find_hr_contact
+        hr_info = find_hr_contact(company_name, email=email_address)
+        if hr_info["found"]:
+            hr_name = hr_info["first_name"]
+            hr_role = hr_info["role"]
+            print(f"  [HR] Found: {hr_info['name']} ({hr_role}) → {hr_info['greeting']}")
+        else:
+            print(f"  [HR] No contact found → Dear Hiring Manager")
+    except ImportError:
+        print(f"  [WARN] hr_finder not available, using generic greeting")
+    except Exception as e:
+        print(f"  [WARN] HR lookup error: {e}")
+    
     # Generate email content
     # Try dynamic ChatGPT generation first (free proxy)
     try:
         from llm_generator import generate_cold_email
-        llm_subject, llm_body = generate_cold_email(job_title, company_name)
+        llm_subject, llm_body = generate_cold_email(job_title, company_name, hr_name=hr_name, hr_role=hr_role)
     except Exception as e:
         print(f"  [WARN] Error calling LLM generator: {e}")
         llm_subject, llm_body = None, None
@@ -201,7 +238,8 @@ def send_email_with_retry(
         subject, body = llm_subject, llm_body
     else:
         # Safe fallback to static configuration
-        subject, body = build_email_body(job_title, company_name)
+        greeting = f"Dear {hr_name}" if hr_name else "Dear Hiring Manager"
+        subject, body = build_email_body(job_title, company_name, greeting=greeting)
     
     # Attempt sending
     for attempt in range(max_retries + 1):

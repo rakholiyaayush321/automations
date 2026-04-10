@@ -6,3 +6,4 @@ pandas
 g4f
 curl_cffi
 nest_asyncio
+dnspython
