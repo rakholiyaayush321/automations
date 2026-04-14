@@ -193,9 +193,13 @@ def send_email_with_retry(
     # Pre-send verification: DNS MX + SMTP RCPT TO check
     try:
         from email_verifier import verify_email as verify_deliverable
-        is_deliverable, verify_reason = verify_deliverable(to_email)
-        if not is_deliverable:
-            print(f"  [VERIFY-FAIL] {to_email}: {verify_reason}")
+        verify_result = verify_deliverable(to_email)
+        is_deliverable = verify_result["status"]
+        verify_reason = verify_result.get("reason", "")
+        score = verify_result.get("score", 100)
+        
+        if is_deliverable == "invalid":
+            print(f"  [VERIFY-FAIL] {to_email}: {verify_reason} (Score: {score})")
             tracker.save_invalid_email(to_email, f"Pre-send verification: {verify_reason}")
             return {
                 'status': 'skipped',
@@ -203,8 +207,10 @@ def send_email_with_retry(
                 'attempts': 0,
                 'timestamp': datetime.now().isoformat()
             }
+        elif is_deliverable == "risky":
+            print(f"  [VERIFY-RISKY] {to_email}: {verify_reason} (Score: {score})")
         else:
-            print(f"  [VERIFY-OK] {to_email}: {verify_reason}")
+            print(f"  [VERIFY-OK] {to_email}: {verify_reason} (Score: {score})")
     except ImportError:
         print(f"  [WARN] email_verifier not available, skipping pre-send check")
     except Exception as e:

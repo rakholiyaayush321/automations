@@ -1,92 +1,77 @@
 {
-  "careers@builtin.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T11:53:42.193106"
+  "testing@mailinator.com": {
+    "email": "testing@mailinator.com",
+    "status": "invalid",
+    "score": 0,
+    "reason": "MX lookup failed: Disposable domain blocked: mailinator.com",
+    "details": {
+      "syntax_valid": true,
+      "is_role_account": false,
+      "is_typo": false,
+      "is_catch_all": false,
+      "has_spf": false,
+      "has_dmarc": false
+    },
+    "checked_at": "2026-04-14T16:42:08.432071"
   },
-  "info@elinsys.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T11:54:55.780792"
+  "hr@gmail.com": {
+    "email": "hr@gmail.com",
+    "status": "invalid",
+    "score": 0,
+    "reason": "SMTP Verification Failed: SMTP rejected recipient (Code: 550)",
+    "details": {
+      "syntax_valid": true,
+      "is_role_account": true,
+      "is_typo": false,
+      "is_catch_all": false,
+      "has_spf": true,
+      "has_dmarc": true
+    },
+    "checked_at": "2026-04-14T16:42:14.617875"
   },
-  "info@zestratech.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T11:55:41.895130"
+  "careers@solulab.com": {
+    "email": "careers@solulab.com",
+    "status": "invalid",
+    "score": 0,
+    "reason": "SMTP Verification Failed: SMTP rejected recipient (Code: 550)",
+    "details": {
+      "syntax_valid": true,
+      "is_role_account": true,
+      "is_typo": false,
+      "is_catch_all": false,
+      "has_spf": true,
+      "has_dmarc": true
+    },
+    "checked_at": "2026-04-14T16:42:15.124116"
   },
-  "surabhi.singarakhia@actowizsolutions.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T11:56:28.976842"
+  "randomfake1234xx@gmial.com": {
+    "email": "randomfake1234xx@gmial.com",
+    "status": "invalid",
+    "score": 0,
+    "reason": "Domain typo detected",
+    "details": {
+      "syntax_valid": true,
+      "is_role_account": false,
+      "is_typo": true,
+      "is_catch_all": false,
+      "has_spf": false,
+      "has_dmarc": false
+    },
+    "checked_at": "2026-04-14T16:42:16.845936"
   },
-  "careers@tracxn.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T11:57:16.481405"
-  },
-  "info@your-space.in": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T11:58:38.171540"
-  },
-  "careers@indusinsights.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T12:04:41.172167"
-  },
-  "info@tridhyatech.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T12:05:27.059681"
-  },
-  "jigneshbhavsar@datatech.in": {
-    "valid": true,
-    "reason": "Verified (MX records found; Temporary response (451) â€” assuming valid)",
-    "checked_at": "2026-04-14T12:06:16.507327"
-  },
-  "info@triospheretech.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T12:07:45.589992"
-  },
-  "careers@gitakshmitechnologies.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T12:10:16.123595"
-  },
-  "careers@angriotechnologies.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T12:11:03.066376"
-  },
-  "careers@techbehemoths.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T12:22:05.063359"
-  },
-  "careers@nimapinfotech.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T13:55:21.426549"
-  },
-  "careers@themanifest.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T13:56:53.905407"
-  },
-  "careers@bing.com": {
-    "valid": false,
-    "reason": "SMTP rejected: Mailbox does not exist (550)",
-    "checked_at": "2026-04-14T14:12:13.444218"
-  },
-  "careers@punetechlab.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX)",
-    "checked_at": "2026-04-14T14:33:21.570068"
-  },
-  "info@aurusinc.com": {
-    "valid": true,
-    "reason": "Verified (MX records found; SMTP accepted recipient)",
-    "checked_at": "2026-04-14T14:35:16.950035"
+  "info@smcdesignsystems.com": {
+    "email": "info@smcdesignsystems.com",
+    "status": "risky",
+    "score": 40,
+    "reason": "Could not connect to MX servers (port 25 blocked or timeout) - Cannot verify",
+    "details": {
+      "syntax_valid": true,
+      "is_role_account": true,
+      "is_typo": false,
+      "is_catch_all": false,
+      "has_spf": true,
+      "has_dmarc": true
+    },
+    "checked_at": "2026-04-14T17:27:33.060216"
   }
 }
