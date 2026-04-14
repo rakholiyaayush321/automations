@@ -1,0 +1,292 @@
+{
+  "invalid_emails": [
+    "careers@nimapinfotech.com",
+    "careers@bing.com",
+    "careers@indusinsights.com",
+    "careers@angriotechnologies.com",
+    "info@elinsys.com",
+    "info@tridhyatech.com",
+    "surabhi.singarakhia@actowizsolutions.com",
+    "careers@techbehemoths.com",
+    "info@zestratech.com",
+    "careers@gitakshmitechnologies.com"
+  ],
+  "failed_emails": [
+    {
+      "email": "info@elinsys.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T11:54:55.785790",
+      "company": "Elinsys"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T11:55:41.900835",
+      "company": "Zestratech"
+    },
+    {
+      "email": "surabhi.singarakhia@actowizsolutions.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T11:56:28.980847",
+      "company": "Actowizsolutions"
+    },
+    {
+      "email": "careers@indusinsights.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T12:04:41.174180",
+      "company": "Indusinsights"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T12:05:27.062218",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:09:19.869876",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T12:10:16.125502",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T12:11:03.069370",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:11:48.072133",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:18:07.511242",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:18:52.516696",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:19:37.521278",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:20:22.533242",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "info@elinsys.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:21:07.547648",
+      "company": "Elinsys"
+    },
+    {
+      "email": "careers@techbehemoths.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T12:22:05.096354",
+      "company": "Techbehemoths"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:28:09.506166",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:28:54.509911",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:29:39.515975",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:30:24.520801",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:31:09.524037",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:31:54.568264",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:34:09.847579",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:34:54.933607",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "careers@indusinsights.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:42:40.540113",
+      "company": "Indusinsights"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:43:25.547741",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:44:10.554292",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T12:44:55.559887",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:46:20.432993",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "info@elinsys.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:47:06.247848",
+      "company": "Elinsys"
+    },
+    {
+      "email": "careers@techbehemoths.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:47:51.311667",
+      "company": "Techbehemoths"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:53:03.758294",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:53:48.836140",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:54:34.096203",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@nimapinfotech.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T13:55:21.456124",
+      "company": "Nimapinfotech"
+    },
+    {
+      "email": "careers@techbehemoths.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:56:06.555851",
+      "company": "Techbehemoths"
+    },
+    {
+      "email": "surabhi.singarakhia@actowizsolutions.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T13:58:00.487645",
+      "company": "Actowizsolutions"
+    },
+    {
+      "email": "careers@techbehemoths.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:04:06.763476",
+      "company": "Techbehemoths"
+    },
+    {
+      "email": "info@elinsys.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:04:51.807356",
+      "company": "Elinsys"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:05:36.850905",
+      "company": "Zestratech"
+    },
+    {
+      "email": "surabhi.singarakhia@actowizsolutions.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:06:21.871341",
+      "company": "Actowizsolutions"
+    },
+    {
+      "email": "careers@bing.com",
+      "reason": "Pre-send verification: SMTP rejected: Mailbox does not exist (550)",
+      "timestamp": "2026-04-14T14:12:13.460408",
+      "company": "Bing"
+    },
+    {
+      "email": "info@tridhyatech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:12:58.491673",
+      "company": "Tridhyatech"
+    },
+    {
+      "email": "info@zestratech.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:13:43.532066",
+      "company": "Zestratech"
+    },
+    {
+      "email": "careers@gitakshmitechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:14:28.548040",
+      "company": "Gitakshmitechnologies"
+    },
+    {
+      "email": "careers@angriotechnologies.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:15:13.585390",
+      "company": "Angriotechnologies"
+    },
+    {
+      "email": "info@elinsys.com",
+      "reason": "Email previously failed",
+      "timestamp": "2026-04-14T14:15:58.684441",
+      "company": "Elinsys"
+    }
+  ]
+}

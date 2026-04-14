@@ -139,8 +139,8 @@ def check_smtp_recipient(email: str, mx_hosts: list) -> Tuple[bool, str]:
         (accepted, message)
     """
     if not mx_hosts:
-        # No MX hosts available — assume valid, let actual send handle failures
-        return True, "No MX hosts available — assuming valid (will verify on send)"
+        # No MX hosts available — mark as invalid
+        return False, "No MX hosts available"
 
     for mx_host in mx_hosts[:2]:  # Try top 2 MX servers
         try:
@@ -178,9 +178,8 @@ def check_smtp_recipient(email: str, mx_hosts: list) -> Tuple[bool, str]:
         except Exception:
             continue
 
-    # Could not connect to any MX — assume valid if MX records exist
-    # (many servers block port 25 from residential IPs)
-    return True, "Could not connect to MX servers (port 25 blocked?) — assuming valid based on MX"
+    # Could not connect to any MX — mark as invalid to avoid sending bounces
+    return False, "Could not connect to MX servers (port 25 blocked or unreachable)"
 
 
 # ── Public API ───────────────────────────────────────────────────────────────

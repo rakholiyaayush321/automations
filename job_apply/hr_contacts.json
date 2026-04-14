@@ -15,7 +15,7 @@
     "name": "",
     "role": "Unknown",
     "source": "not_found",
-    "checked_at": "2026-04-10T15:11:52.233861"
+    "checked_at": "2026-04-13T12:24:26.279044"
   },
   "mindinventory": {
     "name": "",
@@ -130,5 +130,245 @@
     "role": "Unknown",
     "source": "not_found",
     "checked_at": "2026-04-10T18:27:42.211717"
+  },
+  "rajasoftwarelabs": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T12:08:00.849205"
+  },
+  "bebee": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T12:17:57.950887"
+  },
+  "kairasoftware": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T12:19:13.720154"
+  },
+  "internshala": {
+    "name": "com Apply toHumanResourcesSpecialist",
+    "role": "Recruitment",
+    "source": "web_search",
+    "checked_at": "2026-04-13T12:37:56.424221"
+  },
+  "netfillip": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T11:42:50.033773"
+  },
+  "test company": {
+    "name": "Vice President",
+    "role": "Hr Business Partner",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:12:30.104623"
+  },
+  "synoptek": {
+    "name": "LinkedInAlison Fornander",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:35:33.531515"
+  },
+  "lexifo": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T14:38:02.549473"
+  },
+  "brandveda": {
+    "name": "Honey Bajoria",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:39:47.296519"
+  },
+  "manektech": {
+    "name": "Payal Patel",
+    "role": "Hr Manager",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:41:05.719209"
+  },
+  "finalscout": {
+    "name": "FinalScout JH Jo Hall Managing Director",
+    "role": "Recruitment",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:43:04.417200"
+  },
+  "signalhire": {
+    "name": "SignalHire for Firefox",
+    "role": "Recruiter",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:44:52.297827"
+  },
+  "leadiq": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T14:46:54.756210"
+  },
+  "eifasoft": {
+    "name": "Vice President",
+    "role": "Hr Business Partner",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:48:14.440343"
+  },
+  "softyoi": {
+    "name": "Casey Lai",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:53:26.106139"
+  },
+  "qonsulttechsolution": {
+    "name": "Staffing Agency",
+    "role": "Recruitment",
+    "source": "web_search",
+    "checked_at": "2026-04-13T14:55:49.792705"
+  },
+  "quickdials": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T14:57:32.081208"
+  },
+  "seagatecareers": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T16:21:57.952421"
+  },
+  "kreedalabs": {
+    "name": "as Fresher",
+    "role": "Recruitment",
+    "source": "web_search",
+    "checked_at": "2026-04-13T16:24:59.573545"
+  },
+  "webrelier": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T16:26:43.200138"
+  },
+  "amadeus": {
+    "name": "Lokesh Baburao",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-13T16:29:25.138828"
+  },
+  "careers": {
+    "name": "Hiring on LinkedIn It",
+    "role": "Recruiter",
+    "source": "web_search",
+    "checked_at": "2026-04-13T16:30:29.076794"
+  },
+  "builtinpune": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T16:31:55.146738"
+  },
+  "rocketsoftware": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T16:33:18.929747"
+  },
+  "pages": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-13T16:34:40.738425"
+  },
+  "aspiresoftserv": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T11:44:14.806200"
+  },
+  "solguruz": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T11:45:31.666076"
+  },
+  "e2logy": {
+    "name": "Rupesh Singh",
+    "role": "Hr Manager",
+    "source": "web_search",
+    "checked_at": "2026-04-14T11:46:30.787825"
+  },
+  "concettolabs": {
+    "name": "Concetto Labs We cannot provide",
+    "role": "Hr Manager",
+    "source": "web_search",
+    "checked_at": "2026-04-14T11:47:33.414201"
+  },
+  "tcsion": {
+    "name": "Debanshu Panda",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-14T11:48:35.369953"
+  },
+  "akashtechnolabs": {
+    "name": "Vice President",
+    "role": "Hr Business Partner",
+    "source": "web_search",
+    "checked_at": "2026-04-14T11:49:36.070408"
+  },
+  "builtin": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T11:54:00.158541"
+  },
+  "tracxn": {
+    "name": "Kit Job Tracxn",
+    "role": "Recruitment",
+    "source": "web_search",
+    "checked_at": "2026-04-14T11:57:40.698098"
+  },
+  "your-space": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T11:58:56.324555"
+  },
+  "datatech": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T12:06:40.893855"
+  },
+  "triospheretech": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T12:08:22.696961"
+  },
+  "smcdesignsystems": {
+    "name": "HR Manager Jobs in Ahmedabad",
+    "role": "Hr Manager",
+    "source": "web_search",
+    "checked_at": "2026-04-14T13:49:32.579849"
+  },
+  "themanifest": {
+    "name": "Manu Sachdeva",
+    "role": "Talent Acquisition",
+    "source": "web_search",
+    "checked_at": "2026-04-14T13:57:04.927726"
+  },
+  "punetechlab": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T14:34:14.827035"
+  },
+  "aurusinc": {
+    "name": "",
+    "role": "Unknown",
+    "source": "not_found",
+    "checked_at": "2026-04-14T14:35:48.695155"
   }
 }

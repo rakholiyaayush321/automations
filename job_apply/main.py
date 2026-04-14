@@ -387,30 +387,7 @@ def run(dry: bool = False) -> None:
             log("No jobs passed filter. Trying next round...", "WARN")
             continue
 
-        # Step 2.5: Verify emails (only in live mode)
-        if not dry:
-            log("Step 2.5 -- Verifying email deliverability...")
-            try:
-                from email_verifier import verify_email as verify_deliverable
-                verified_jobs = []
-                for job in filtered:
-                    email = job.get("email", "").strip()
-                    if not email:
-                        continue
-                    is_ok, reason = verify_deliverable(email)
-                    if is_ok:
-                        log(f"  [OK]   {job['company']}: {email}")
-                        verified_jobs.append(job)
-                    else:
-                        log(f"  [FAIL] {job['company']}: {email} -- {reason}", "WARN")
-                log(f"Verified: {len(verified_jobs)}/{len(filtered)}")
-                filtered = verified_jobs
-            except Exception as e:
-                log(f"Verification error: {e}", "WARN")
 
-        if not filtered:
-            log("No verified jobs this round. Trying next...", "WARN")
-            continue
 
         # Step 3: Apply (only send what we still need)
         jobs_to_send = filtered[:remaining]

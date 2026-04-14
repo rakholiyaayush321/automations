@@ -6,6 +6,7 @@ emailer_enhanced.py - Enhanced email sender with multiple templates and retry lo
 import json
 import re
 import smtplib
+import socket
 import time
 from datetime import datetime
 from email.mime.application import MIMEApplication
@@ -28,6 +29,7 @@ class EmailTracker:
         self.sent_emails: List[str] = []
         self.failed_emails: List[Dict] = []
         self.failed_companies: List[str] = []
+        self.current_company: str = "Unknown"
         self.invalid_emails: set = self._load_invalid_emails()
         
     def _load_invalid_emails(self) -> set:
@@ -48,7 +50,7 @@ class EmailTracker:
             'email': email,
             'reason': reason,
             'timestamp': datetime.now().isoformat(),
-            'company': self.current_company
+            'company': getattr(self, 'current_company', 'Unknown')
         })
         
         # Save to file
@@ -217,9 +219,9 @@ def send_email_with_retry(
         if hr_info["found"]:
             hr_name = hr_info["first_name"]
             hr_role = hr_info["role"]
-            print(f"  [HR] Found: {hr_info['name']} ({hr_role}) → {hr_info['greeting']}")
+            print(f"  [HR] Found: {hr_info['name']} ({hr_role}) -> {hr_info['greeting']}")
         else:
-            print(f"  [HR] No contact found → Dear Hiring Manager")
+            print(f"  [HR] No contact found -> Dear Hiring Manager")
     except ImportError:
         print(f"  [WARN] hr_finder not available, using generic greeting")
     except Exception as e:
@@ -290,6 +292,20 @@ def send_email_with_retry(
                 'attempts': attempt + 1,
                 'timestamp': datetime.now().isoformat()
             }
+            
+        except (socket.gaierror, socket.error, ConnectionError, smtplib.SMTPConnectError) as e:
+            # Network issue - temporary failure
+            print(f"  [RETRY] Network connection error, waiting {RETRY_DELAY_SECONDS}s...")
+            if attempt < max_retries:
+                time.sleep(RETRY_DELAY_SECONDS)
+                continue
+            else:
+                return {
+                    'status': 'failed',
+                    'message': f"Network error: {str(e)}",
+                    'attempts': attempt + 1,
+                    'timestamp': datetime.now().isoformat()
+                }
             
         except smtplib.SMTPException as e:
             error_msg = str(e).lower()
@@ -411,6 +427,7 @@ def print_summary():
 # ── Legacy Support ────────────────────────────────────────────────────────────
 def send(to_email: str, company_name: str = None, job_title: str = None) -> Dict:
     """Legacy send function for backward compatibility."""
+    tracker.current_company = company_name or "Unknown"
     if company_name and job_title:
         return send_email_with_retry(to_email, company_name, job_title)
     else:
